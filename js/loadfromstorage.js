@@ -72,8 +72,10 @@ function LoadImages(json, elem) {
     CurrentOpenCategory = elem.innerText;
 
     elem.innerText = '- ' + elem.innerText;
-    for (let info in json["Images"]) {
-        ImagesZones.appendChild(CreateImageElement(json["Images"][info]));
+
+    console.log(json["Images"].length);
+    for (let i = json["Images"].length - 1; i >= 0; i--) {
+        ImagesZones.appendChild(CreateImageElement(json["Images"][i]));
         ImagesZones.appendChild(document.createElement('br'));
     }
 }
