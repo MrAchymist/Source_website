@@ -26,7 +26,7 @@ function LoadFromStorage()
 
 function CreateImageElement(infos)
 {
-    let LinkElem = CreateElem('image-dose', 'a', 'image-link', {href: infos.Sauce});
+    let LinkElem = CreateElem('image-dose', 'a', 'image-link', {href: infos.Sauce, target: '_blank', rel: 'noreferrer noopener'});
     let ImagePart = CreateElem('image-part', 'img', 'image-view', {src: infos.Image});
 
     LinkElem.appendChild(ImagePart);
