@@ -34,7 +34,7 @@ function CreateImageElement(infos)
 
 function CreateCategorieInfo(category)
 {
-    let CatElem = CreateElem('channel', 'text', 'channel-link', {innerText: category});
+    let CatElem = CreateElem('channel', 'text', 'channel-link', {innerText: Capitalize(category)});
     CatElem.addEventListener('click', LoadCategory);
 
     return CatElem;

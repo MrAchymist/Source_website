@@ -66,3 +66,9 @@ function CreateZone(zone, elemlist) {
 
     LastBr.remove();
 }
+
+/* Format utilities */
+function Capitalize(s) {
+    if (typeof s !== 'string') return '';
+    return s.charAt(0).toUpperCase() + s.slice(1);
+}
