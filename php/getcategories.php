@@ -8,5 +8,5 @@ foreach ($dirs as $fileinfo) {
         array_push($allcategories, pathinfo($fileinfo)['filename']);
     }
 }
-
+sort($allcategories);
 echo json_encode($allcategories);
