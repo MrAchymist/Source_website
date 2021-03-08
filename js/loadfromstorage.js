@@ -1,6 +1,8 @@
 var ImagesZones = document.getElementById('images-zone');
 var ChannelsZones = document.getElementById('channels-zone');
 var CurrentOpenCategory = '';
+var HellMode = false;
+var HellCategories = {};
 
 function LoadFromStorage()
 {
@@ -14,8 +16,13 @@ function LoadFromStorage()
             JSON.parse(this.responseText).forEach(e => {
                 availableChannels.push(e);
             });
-            
+
+            InitHellCategories(availableChannels);
+
             for (let i = 0; i < availableChannels.length; i++) {
+                if (HellCategories[availableChannels[i]] === true && HellMode !== true) {
+                    continue;
+                }
                 ChannelsZones.appendChild(CreateCategorieInfo(availableChannels[i]));
                 ChannelsZones.appendChild(document.createElement('br'));
             }
@@ -88,4 +95,26 @@ function CollapseCategory() {
             Categories[i].innerText = Categories[i].innerText.slice(2);
         }
     }
+}
+
+function SetHell() {
+    let check = document.getElementById('hellswitch');
+    HellMode = check.checked;
+    ChannelsZones.innerHTML = '';
+    LoadFromStorage();
+}
+
+function InitHellCategories(categories) {
+    for (let category in categories) {
+        let http = new XMLHttpRequest();
+        http.open("GET", "php/getCategoryJson.php?category=" + categories[category], false);
+        http.send(null);
+
+        if (http.status === 200) {
+            let CategoryJson = JSON.parse(http.responseText);
+            HellCategories[categories[category]] = CategoryJson["Hellish"];
+        }
+    }
+
+    InitCompleted = true;
 }
