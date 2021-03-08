@@ -21,23 +21,6 @@ function LoadFromStorage()
         }
     }
     http.send(null);
-    /*
-    let SauceList = [];
-
-    let SauceObj = {};
-    let SauceTwo = {};
-    SauceObj.Source = 'https://www.pixiv.net/en/artworks/88120231';
-    SauceObj.Info = 'https://i.pximg.net/img-master/img/2021/02/28/21/00/41/88120231_p0_master1200.jpg';
-    SauceTwo.Info = 'https://media.discordapp.net/attachments/810657774387200050/817222527217827920/84240506_p0_master1200.png';
-    SauceTwo.Source = 'https://www.pixiv.net/en/artworks/84240506';
-
-    SauceList.push(SauceObj);
-    SauceList.push(SauceTwo);
-
-    for(let i = 0; i < SauceList.length; i++) {
-        ImagesZones.appendChild(CreateImageElement(SauceList[i]));
-    }
-    */
 }
 
 function CreateImageElement(infos)
@@ -72,7 +55,7 @@ function LoadCategory()
 
 function LoadImages(json, elem) {
     ImagesZones.innerHTML = '';
-    
+
     for (let info in json["Images"]) {
         ImagesZones.appendChild(CreateImageElement(json["Images"][info]));
         ImagesZones.appendChild(document.createElement('br'));
