@@ -71,6 +71,8 @@ function LoadCategory()
 }
 
 function LoadImages(json, elem) {
+    ImagesZones.innerHTML = '';
+    
     for (let info in json["Images"]) {
         ImagesZones.appendChild(CreateImageElement(json["Images"][info]));
         ImagesZones.appendChild(document.createElement('br'));
