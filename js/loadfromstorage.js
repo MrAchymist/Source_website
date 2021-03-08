@@ -1,5 +1,6 @@
 var ImagesZones = document.getElementById('images-zone');
 var ChannelsZones = document.getElementById('channels-zone');
+var CurrentOpenCategory = '';
 
 function LoadFromStorage()
 {
@@ -42,22 +43,47 @@ function CreateCategorieInfo(category)
 
 function LoadCategory()
 {
+    let CategoryButton = this;
+
+    if (CurrentOpenCategory !== '' && CategoryButton.innerText.includes(CurrentOpenCategory)) {
+        ImagesZones.innerHTML = '';
+        CurrentOpenCategory = '';
+
+        CollapseCategory();
+        return;
+    }
+
     let http = new XMLHttpRequest();
-    http.open("GET", "php/getCategoryJson.php?category=" + this.innerText);
+    http.open("GET", "php/getCategoryJson.php?category=" + this.innerText.toLowerCase());
     http.onreadystatechange = function ()
     {
         if (this.readyState === 4 && this.status === 200) {
-            LoadImages(JSON.parse(this.responseText));
+            LoadImages(JSON.parse(this.responseText), CategoryButton);
         }
     }
     http.send(null);
 }
 
 function LoadImages(json, elem) {
+    if (CurrentOpenCategory !== '') {
+        CollapseCategory();
+    }
     ImagesZones.innerHTML = '';
+    CurrentOpenCategory = elem.innerText;
 
+    elem.innerText = '- ' + elem.innerText;
     for (let info in json["Images"]) {
         ImagesZones.appendChild(CreateImageElement(json["Images"][info]));
         ImagesZones.appendChild(document.createElement('br'));
+    }
+}
+
+function CollapseCategory() {
+    let Categories = document.getElementsByClassName('channel-link');
+
+    for (let i = 0; i < Categories.length; i++) {
+        if (Categories[i].innerText.includes('-')) {
+            Categories[i].innerText = Categories[i].innerText.slice(2);
+        }
     }
 }
