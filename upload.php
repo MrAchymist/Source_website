@@ -11,11 +11,11 @@ $infos = json_decode(file_get_contents('php://input'), true);
 $imagearray = array();
 
 if (!file_exists("./save/" . $infos['channel'] . '.json')) {
-    echo "Checking and creating a new file\n";
     $nfile = new stdClass;
     array_push($imagearray, array('Sauce' => $infos['source'], 'Image' => $infos['image']));
 
     $nfile->Images = $imagearray;
+    $nfile->Hellish = $infos['hell'];
     $enfile = json_encode($nfile);
     
     file_put_contents("./save/" . $infos['channel'] . '.json', $enfile);
