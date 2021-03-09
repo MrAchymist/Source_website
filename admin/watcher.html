@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="icon" href="res/sauce.png">
+    <link rel="shortcut icon" href="res/sauce.png">
+
+    <meta charset="UTF-8">
+    <title>What's the sauce?</title>
+    <meta name="description" content="A website to get the last posts from a certain Discord server, and get the sauce">
+</head>
+
+<body>
+    <label title="Welcome">Welcome to Sauce!</label>
+    <br>
+    <br>
+    <div id='channels-zone'>
+    </div>
+    <div id='images-zone'>
+    </div>
+    <br>
+    <br>
+    <button id='submit' onclick="SubmitDelete()">Execute</button>
+</body>
+
+<script type="text/javascript" src="../js/tools.js"></script>
+<script type="text/javascript" src="js/adminload.js"></script>
+<script>
+    LoadFromStorage();
+
+    function SubmitDelete()
+    {
+        RemoveFromDb();
+    }
+</script>
