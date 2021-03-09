@@ -72,3 +72,40 @@ function Capitalize(s) {
     if (typeof s !== 'string') return '';
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
+
+/* Query utilities */
+function IndexOf(array, field, value) {
+    let Index = -1;
+
+    for (let i = 0; i < array.length; i++) {
+        if (array[i][field] === value) {
+            return i;
+        }
+    }
+
+    return Index;
+}
+
+function IndexesOf(array, field, value) {
+    let Indexes = [];
+
+    for (let i = 0; i < array.length; i++) {
+        if (array[i][field] === value) {
+            Indexes.push(i);
+        }
+    }
+
+    return Indexes;
+}
+
+function Delete(array, field, value) {
+    let IndexesToDelete = IndexesOf(array, field, value);
+
+    for (let i = IndexesToDelete.length - 1; i >= 0; i--) {
+        Remove(array, IndexesToDelete[i]);
+    }
+}
+
+function Remove(array, index) {
+    array.splice(index, 1);
+}
