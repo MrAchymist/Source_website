@@ -4,6 +4,15 @@ var CurrentOpenCategory = '';
 var HellMode = false;
 var HellCategories = {};
 
+document.onload = RestoreState();
+
+function RestoreState()
+{
+    HellMode = (localStorage['Hell'] === 'true');
+    document.getElementById('hellswitch').checked = HellMode;
+    LoadFromStorage();
+}
+
 function LoadFromStorage()
 {
     let availableChannels = [];
@@ -99,6 +108,7 @@ function SetHell() {
     let check = document.getElementById('hellswitch');
     HellMode = check.checked;
     ChannelsZones.innerHTML = '';
+    localStorage['Hell'] = check.checked;
     LoadFromStorage();
 }
 
@@ -113,6 +123,4 @@ function InitHellCategories(categories) {
             HellCategories[categories[category]] = CategoryJson["Hellish"];
         }
     }
-
-    InitCompleted = true;
 }
