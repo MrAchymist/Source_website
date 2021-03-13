@@ -24,7 +24,7 @@ else
 {
     $json = json_decode(file_get_contents("./save/" . $infos['channel'] . '.json'), true);
     $imagearray = $json["Images"];
-    
+
     array_push($imagearray, array('Sauce' => $infos['source'], 'Image' => $infos['image']));
     
     $json["Images"] = $imagearray;
