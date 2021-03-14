@@ -45,6 +45,11 @@ function CreateImageElement(infos)
     let LinkElem = CreateElem('image-dose', 'a', 'image-link', {href: infos.Sauce, target: '_blank', rel: 'noreferrer noopener'});
     let ImagePart = CreateElem('image-part', 'img', 'image-view', {src: infos.Image});
 
+    LinkElem.dataset.ImageSource = infos.Sauce;
+    LinkElem.dataset.SearchUrl = 'https://saucenao.com/search.php?db=999&url=' + infos.Image;
+
+    LinkElem.addEventListener('click', ShouldToggle);
+
     LinkElem.appendChild(ImagePart);
     return LinkElem;
 }
@@ -123,4 +128,16 @@ function InitHellCategories(categories) {
             HellCategories[categories[category]] = CategoryJson["Hellish"];
         }
     }
+}
+
+// Link onClick override
+function ShouldToggle()
+{
+    if (IsKeyDown(83)) {
+        this.href = this.dataset.SearchUrl;
+    } else {
+        this.href = this.dataset.ImageSource;
+    }
+
+    return true;
 }
