@@ -110,6 +110,14 @@ function CollapseCategory() {
 }
 
 function SetHell() {
+    if (HellMode === false) {
+        let Confirm = confirm("Are you sure to toggle hell mode? This mode can include disturbing images to a few");
+        if (Confirm === false) {
+            let check = document.getElementById('hellswitch');
+            check.checked = false;
+            return;
+        }
+    }
     let check = document.getElementById('hellswitch');
     HellMode = check.checked;
     ChannelsZones.innerHTML = '';
